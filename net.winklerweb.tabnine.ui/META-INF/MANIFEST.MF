@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tabnine Plugin UI
+Bundle-SymbolicName: net.winklerweb.tabnine.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Stefan Winkler (https://winklerweb.net)
+Automatic-Module-Name: net.winklerweb.tabnine.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.jface.text,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.ui.workbench.texteditor,
+ net.winklerweb.tabnine.core,
+ org.eclipse.text,
+ com.tabnine.binary,
+ org.eclipse.e4.ui.workbench,
+ org.eclipse.osgi.services,
+ org.eclipse.e4.ui.model.workbench
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/net.winklerweb.tabnine.ui.TextEditorPartCreationListener.xml

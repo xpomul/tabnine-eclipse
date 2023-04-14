@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tabnine Binary Management
+Bundle-SymbolicName: com.tabnine.binary
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.tabnine,
+ com.tabnine.binary,
+ com.tabnine.binary.exceptions,
+ com.tabnine.binary.fetch,
+ com.tabnine.binary.requests.autocomplete,
+ com.tabnine.general
+Require-Bundle: com.google.gson,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-Vendor: Stefan Winkler (https://winklerweb.net)
+Automatic-Module-Name: com.tabnine.binary
+Bundle-Activator: com.tabnine.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-11

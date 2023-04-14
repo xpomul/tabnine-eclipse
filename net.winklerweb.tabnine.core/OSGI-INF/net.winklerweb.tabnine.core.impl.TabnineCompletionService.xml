@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="net.winklerweb.tabnine.core.impl.TabnineCompletionService">
+   <service>
+      <provide interface="net.winklerweb.tabnine.core.ITabnineCompletionService"/>
+   </service>
+   <implementation class="net.winklerweb.tabnine.core.impl.TabnineCompletionService"/>
+</scr:component>

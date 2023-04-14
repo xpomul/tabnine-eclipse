@@ -1,0 +1,7 @@
+The code in this bundle was taken and adapted from https://github.com/codota/tabnine-intellij
+
+Basically, instead of writing the downloader and manager for the TabNine binary myself, I have
+adapted the one from the intellij plugin.
+
+To make this clear (and to provide the possibility to refactor this common code into an IDE
+independent common package) I have kept this code in its own bundle.

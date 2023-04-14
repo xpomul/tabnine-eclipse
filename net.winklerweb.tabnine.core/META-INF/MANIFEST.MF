@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tabnine Plugin Core
+Bundle-SymbolicName: net.winklerweb.tabnine.core;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Stefan Winkler (https://winklerweb.net)
+Automatic-Module-Name: net.winklerweb.tabnine.core
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: net.winklerweb.tabnine.core,
+ net.winklerweb.tabnine.core.impl
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.osgi.services,
+ org.apache.commons.io,
+ com.tabnine.binary,
+ org.eclipse.text,
+ org.eclipse.jface.text
+Bundle-ActivationPolicy: lazy
+Service-Component: OSGI-INF/net.winklerweb.tabnine.core.impl.TabnineCompletionCache.xml,
+ OSGI-INF/net.winklerweb.tabnine.core.impl.TabnineCompletionService.xml
