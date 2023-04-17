@@ -3,11 +3,17 @@ Eclipse Plugin to use AI-based code completion provided by TabNine (see https://
 
 Be aware that this plugin will doanload and run a binary by TabNine on your PC which functions as a client for their cloud server.
 
-I am not in any way affiliated with TabNine - Use this software at your own risk!
+I am not in any way affiliated with TabNine and this is not their official Plugin! - Use this software at your own risk!
+
+## Demo
+
+https://user-images.githubusercontent.com/1151370/232522005-10ac7496-2359-4ed1-9a6f-5336440153e4.mp4
 
 ## How to use
 
-There is currently no update site; clone the code for yourself, `mvn clean package` it and use your locally built update site.
+Use the update site at https://xpomul.github.io/tabnine-eclipse/ to install the plugin into your Eclipse IDE.
+
+Alternatively, clone the code for yourself, build with `mvn clean package -f net.winklerweb.tabnine.parent/pom.xml` and use your locally built update site.
 
 After installing in your Eclipse IDE (I have used 2022_06 as target platform; any Eclipse release earlier or later may or may not work),
 go to the preferences to change the Tabnine settings to your liking.
