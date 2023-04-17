@@ -16,7 +16,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 17
+          java-version: '17'
+          distribution: 'temurin'
       - name: Build with Maven
         run: mvn clean package -f ./net.winklerweb.tabnine.releng/pom.xml
       - name: Setup Pages
