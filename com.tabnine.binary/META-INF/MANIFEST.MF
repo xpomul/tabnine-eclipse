@@ -11,8 +11,10 @@ Export-Package: com.tabnine,
  com.tabnine.general
 Require-Bundle: com.google.gson,
  org.eclipse.core.runtime,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.core.net
 Bundle-Vendor: Stefan Winkler (https://winklerweb.net)
 Automatic-Module-Name: com.tabnine.binary
 Bundle-Activator: com.tabnine.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy

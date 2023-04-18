@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import org.eclipse.core.runtime.Platform;
 
+import com.tabnine.ProxyUtil;
 import com.tabnine.binary.exceptions.FailedToDownloadException;
 
 public class GeneralDownloader {
@@ -29,10 +30,7 @@ public class GeneralDownloader {
 					return false;
 				}
 			}
-			URLConnection connection = new URL(urlString).openConnection();
-			connection.setConnectTimeout(REMOTE_CONNECTION_TIMEOUT);
-			connection.setReadTimeout(BINARY_READ_TIMEOUT);
-			Files.copy(connection.getInputStream(), tempDestination, StandardCopyOption.REPLACE_EXISTING);
+			ProxyUtil.runWithUrlConnection(urlString, c -> Files.copy(c.getInputStream(), tempDestination, StandardCopyOption.REPLACE_EXISTING));
 		} catch (IOException e) {
 			Platform.getLog(GeneralDownloader.class).warn("Unexpected Exception", e);
 			return false;

@@ -32,11 +32,11 @@ public final class Log {
 	}
 
 	public static void warning(String s) {
-		Log.warning(s);
+		log.warn(s);
 	}
 
 	public static void warning(String s, Throwable t) {
-		Log.warning(s, t);
+		log.warn(s, t);
 	}
 
 	public static void info(String s) {
