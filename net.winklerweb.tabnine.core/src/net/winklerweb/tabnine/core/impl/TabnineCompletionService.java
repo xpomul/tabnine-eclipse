@@ -177,4 +177,30 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 		Log.error("Could not parse detail string " + detail);
 		return 0d;
 	}
+
+	@Override
+	public void openTabnineConfig() {
+		// get the lowlevel facade to send the request
+		var requestFacade = DependencyContainer.instanceOfBinaryRequestFacade();
+
+		// prepare the request
+		var request = new AutocompleteRequest();
+		request.regionIncludesBeginning = true;
+		request.regionIncludesEnd = true;
+		request.before = "tabnine::config";
+		request.after = "";
+		request.filename = "";
+		request.offset = 0;
+		request.line = 0;
+		request.character = 0;
+		request.maxResults = 1;
+		
+		var response = requestFacade.executeRequest(request);
+		if (response != null && response.results.length > 0)
+		{
+			Log.info(response.results[0].new_prefix);
+		} else {
+			Log.error("Something went wrong when trying to open TabNine config in the browser");
+		}
+	}
 }

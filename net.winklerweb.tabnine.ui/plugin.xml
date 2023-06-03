@@ -22,6 +22,11 @@
             id="net.winklerweb.tabnine.ui.category"
             name="TabNine">
       </category>
+      <command
+            categoryId="net.winklerweb.tabnine.ui.category"
+            id="net.winklerweb.tabnine.ui.openConfig"
+            name="Open TabNine Configuration in the browser">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -48,6 +53,10 @@
                </instanceof>
             </with>
          </enabledWhen>
+      </handler>
+      <handler
+            class="net.winklerweb.tabnine.ui.handlers.OpenTabnineConfigHandler"
+            commandId="net.winklerweb.tabnine.ui.openConfig">
       </handler>
    </extension>
    <extension
@@ -127,6 +136,12 @@
             contextId="org.eclipse.ui.textEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+NUMPAD_0">
+      </key>
+      <key
+            commandId="net.winklerweb.tabnine.ui.openConfig"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+NUMPAD_7">
       </key>
    </extension>
    <extension

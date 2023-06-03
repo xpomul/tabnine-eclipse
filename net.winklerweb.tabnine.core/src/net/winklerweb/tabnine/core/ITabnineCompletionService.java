@@ -22,4 +22,7 @@ public interface ITabnineCompletionService {
 	 * @return the resulting list of completion proposals.
 	 */
 	List<CompletionProposal> complete(ITextViewer textViewer, int offset, String path);
+	
+	void openTabnineConfig();
+	
 }
