@@ -27,6 +27,11 @@
             id="net.winklerweb.tabnine.ui.openConfig"
             name="Open TabNine Configuration in the browser">
       </command>
+      <command
+            categoryId="net.winklerweb.tabnine.ui.category"
+            id="net.winklerweb.tabnine.ui.editPromptInjection"
+            name="Configure Prompt Injection">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -57,6 +62,10 @@
       <handler
             class="net.winklerweb.tabnine.ui.handlers.OpenTabnineConfigHandler"
             commandId="net.winklerweb.tabnine.ui.openConfig">
+      </handler>
+      <handler
+            class="net.winklerweb.tabnine.ui.handlers.ConfigureInjectionCommentHandler"
+            commandId="net.winklerweb.tabnine.ui.editPromptInjection">
       </handler>
    </extension>
    <extension
@@ -142,6 +151,12 @@
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+NUMPAD_7">
+      </key>
+      <key
+            commandId="net.winklerweb.tabnine.ui.editPromptInjection"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+NUMPAD_8">
       </key>
    </extension>
    <extension

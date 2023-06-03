@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.ServiceCaller;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
 import org.osgi.service.component.annotations.Component;
@@ -20,6 +21,7 @@ import com.tabnine.general.DependencyContainer;
 import com.tabnine.general.StaticConfig;
 
 import net.winklerweb.tabnine.core.CompletionProposal;
+import net.winklerweb.tabnine.core.ICommentInjectionService;
 import net.winklerweb.tabnine.core.ITabnineCompletionService;
 
 /**
@@ -39,7 +41,7 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 	 * A regex pattern that matches a completion detail double value
 	 */
 	private static final Pattern DOUBLE_PATTERN = Pattern.compile("(0\\.\\d+)");
-
+	
 	@Override
 	public List<CompletionProposal> complete(ITextViewer viewer, int offset, String path) {
 
@@ -62,9 +64,17 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 		request.regionIncludesBeginning = prefixStart == 0;
 		request.regionIncludesEnd = suffixEnd == document.getLength();
 
+		StringBuilder prefixBuilder = new StringBuilder();
+		ServiceCaller.callOnce(getClass(), ICommentInjectionService.class, service -> {
+			service.getCurrentInjectionComment().ifPresent(comment -> {
+				prefixBuilder.append("/* ").append(comment).append(" */\n\n");
+			});
+		});
+		
 		try {
 			// set the context before and after the current cursor position to the request
-			request.before = document.get(prefixStart, offset - prefixStart);
+			prefixBuilder.append(document.get(prefixStart, offset - prefixStart));
+			request.before = prefixBuilder.toString();
 			request.after = document.get(offset, suffixEnd - offset);
 
 			// provide filename and file location information

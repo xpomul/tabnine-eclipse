@@ -13,7 +13,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.io,
  com.tabnine.binary,
  org.eclipse.text,
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ com.google.gson
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/net.winklerweb.tabnine.core.impl.TabnineCompletionCache.xml,
+Service-Component: OSGI-INF/net.winklerweb.tabnine.core.impl.CommentInjectionService.xml,
+ OSGI-INF/net.winklerweb.tabnine.core.impl.TabnineCompletionCache.xml,
  OSGI-INF/net.winklerweb.tabnine.core.impl.TabnineCompletionService.xml
