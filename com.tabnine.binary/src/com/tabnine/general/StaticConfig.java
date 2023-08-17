@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.FrameworkUtil;
+
+import com.tabnine.Activator;
 
 public class StaticConfig {
 	// Must be identical to what is written under <id>com.tabnine.TabNine</id> in
@@ -14,8 +18,8 @@ public class StaticConfig {
 	public static final String TABNINE_PLUGIN_ID_RAW = "com.tabnine.TabNine";
 	public static final int MAX_COMPLETIONS = 5;
 	public static final String BINARY_PROTOCOL_VERSION = "4.4.223";
-	public static final int COMPLETION_TIME_THRESHOLD = 1000;
-	public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 3000;
+	public static final int COMPLETION_TIME_THRESHOLD = 3000;
+	public static final int NEWLINE_COMPLETION_TIME_THRESHOLD = 10000;
 	public static final int ILLEGAL_RESPONSE_THRESHOLD = 5;
 	public static final int ADVERTISEMENT_MAX_LENGTH = 100;
 	public static final int MAX_OFFSET = 100000; // 100 KB
@@ -109,7 +113,8 @@ public class StaticConfig {
 	}
 
 	public static Path getBaseDirectory() {
-		return Paths.get(System.getProperty(USER_HOME_PATH_PROPERTY), TABNINE_FOLDER_NAME);
+		var stateLoc = Platform.getStateLocation(FrameworkUtil.getBundle(StaticConfig.class));
+		return stateLoc.toFile().toPath();
 	}
 
 	public static Path getActiveVersionPath() {

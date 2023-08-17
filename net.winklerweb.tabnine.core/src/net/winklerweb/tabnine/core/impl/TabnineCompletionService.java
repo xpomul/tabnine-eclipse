@@ -40,7 +40,7 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 	/**
 	 * A regex pattern that matches a completion detail double value
 	 */
-	private static final Pattern DOUBLE_PATTERN = Pattern.compile("(0\\.\\d+)");
+	private static final Pattern DOUBLE_PATTERN = Pattern.compile("(\\d\\.\\d+)");
 	
 	@Override
 	public List<CompletionProposal> complete(ITextViewer viewer, int offset, String path) {
