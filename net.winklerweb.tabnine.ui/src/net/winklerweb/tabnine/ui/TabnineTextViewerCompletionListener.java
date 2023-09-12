@@ -97,7 +97,7 @@ public class TabnineTextViewerCompletionListener implements CaretListener, Paint
 		
 	private void requestNewProposalsAndRedraw(int offset)
 	{
-		var ticketNumber = requestTicketCounter.getAndIncrement();
+		var ticketNumber = requestTicketCounter.incrementAndGet();
 		// request new proposals and send redraw request
 		CompletableFuture.runAsync(() -> {
 			// ignore outdated requests			
