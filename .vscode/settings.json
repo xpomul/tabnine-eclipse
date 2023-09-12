@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "net.winklerweb.tabnine.ui/src",
+        "net.winklerweb.tabnine.core/src",
+        "com.tabnine.binary/src"
+    ]
+}

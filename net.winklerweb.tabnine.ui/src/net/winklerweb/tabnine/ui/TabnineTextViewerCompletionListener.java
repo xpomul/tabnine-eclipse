@@ -3,6 +3,9 @@ package net.winklerweb.tabnine.ui;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.core.runtime.ServiceCaller;
 import org.eclipse.jface.resource.JFaceResources;
@@ -47,6 +50,10 @@ public class TabnineTextViewerCompletionListener implements CaretListener, Paint
 
 	private String editorInputPath;
 
+	private AtomicInteger requestTicketCounter = new AtomicInteger(0);
+
+	private Executor delayedExecutor = CompletableFuture.delayedExecutor(30, TimeUnit.MILLISECONDS);
+
 	/**
 	 * Create a new listener.
 	 * 
@@ -90,14 +97,21 @@ public class TabnineTextViewerCompletionListener implements CaretListener, Paint
 		
 	private void requestNewProposalsAndRedraw(int offset)
 	{
+		var ticketNumber = requestTicketCounter.getAndIncrement();
 		// request new proposals and send redraw request
 		CompletableFuture.runAsync(() -> {
-			var completions = new ArrayList<CompletionProposal>();
-			completionServiceCaller.call(
-					service -> completions.addAll(service.complete(textViewer, offset, editorInputPath)));
-			completionCache.call(cache -> cache.cacheCompletions(completions));
-			requestRedrawForNewCompletions(completions);
-		});
+			// ignore outdated requests			
+			if (ticketNumber == requestTicketCounter.intValue()) {				
+				var completions = new ArrayList<CompletionProposal>();
+				completionServiceCaller.call(
+						service -> completions.addAll(service.complete(textViewer, offset, editorInputPath)));
+				// ignore outdated results
+				if (ticketNumber == requestTicketCounter.intValue()) {
+					completionCache.call(cache -> cache.cacheCompletions(completions));
+					requestRedrawForNewCompletions(completions);	
+				}
+			}
+		}, delayedExecutor);
 	}
 
 	private void requestRedrawForNewCompletions(List<CompletionProposal> completions) {
