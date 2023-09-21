@@ -3,6 +3,7 @@ package net.winklerweb.tabnine.core.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -42,6 +43,13 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 	 */
 	private static final Pattern DOUBLE_PATTERN = Pattern.compile("(\\d\\.\\d+)");
 	
+	/**
+	 * Info message last logged.
+	 * 
+	 * We store the last logged info message here, so we don't log the same message over and over again...
+	 */
+	private String lastLoggedInfoMessage = null;
+
 	@Override
 	public List<CompletionProposal> complete(ITextViewer viewer, int offset, String path) {
 
@@ -97,7 +105,7 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 
 		// If there are user messages, then report them in the error log view
 		// (TODO: show them along with the proposals?)
-		Stream.of(response.user_message).map(s -> "Tabnine Message: " + s).forEach(Platform.getLog(getClass())::info);
+		Stream.of(response.user_message).map(s -> "Tabnine Message: " + s).forEach(this::logInfo);
 
 		// Group the response by completion string
 		// Sometimes TabNine reports the same proposal from local and cloud models, so
@@ -113,6 +121,19 @@ public class TabnineCompletionService implements ITabnineCompletionService {
 				.collect(Collectors.toList());
 
 		return sortedCompletionProposals;
+	}
+
+	/**
+	 * Log the information message retrieved from TabNine - but cache the logged message and suppress multiple
+	 * occurrences of the same message.
+	 * 
+	 * @param message the message to log
+	 */
+	private void logInfo(String message) {
+		if (!Objects.equals(lastLoggedInfoMessage, message)) {
+			Platform.getLog(getClass()).info(message);
+			lastLoggedInfoMessage = message;
+		}
 	}
 
 	/**

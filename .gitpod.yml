@@ -2,7 +2,7 @@
 tasks:
   - before: code --install-extension redhat.java
   - init: |
-      sdk install java 17.0.8-amzn
+      sdk default java 17.0.8.fx-zulu
       mvn install -f ./net.winklerweb.tabnine.parent/pom.xml
 
 vscode:
